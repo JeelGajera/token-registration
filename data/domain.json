@@ -1,0 +1,22 @@
+[
+    {
+        "title": "Bank",
+        "link": "/home",
+        "thumbnail": "/domain/bank.svg"
+    },
+    {
+        "title": "Hospital",
+        "link": "/home",
+        "thumbnail": "/domain/hospital.svg"
+    },
+    {
+        "title": "Municipal Corporation",
+        "link": "/home",
+        "thumbnail": "/domain/office.svg"
+    },
+    {
+        "title": "Government Office",
+        "link": "/home",
+        "thumbnail": "/domain/org.svg"
+    }
+]
