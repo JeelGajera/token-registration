@@ -1,22 +1,22 @@
 [
     {
         "title": "Bank",
-        "link": "/home",
+        "link": "/departments/bank",
         "thumbnail": "/domain/bank.svg"
     },
     {
         "title": "Hospital",
-        "link": "/home",
+        "link": "/departments/hospital",
         "thumbnail": "/domain/hospital.svg"
     },
     {
         "title": "Municipal Corporation",
-        "link": "/home",
+        "link": "/departments/municipality",
         "thumbnail": "/domain/office.svg"
     },
     {
         "title": "Government Office",
-        "link": "/home",
+        "link": "/departments/government",
         "thumbnail": "/domain/org.svg"
     }
 ]

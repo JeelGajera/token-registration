@@ -19,7 +19,7 @@ function Button({ onClick, ref, type, size, children,btype, className, name, ...
       onClick={onClick}
       ref={ref}
       {...props}
-      className={`text-white px-12 py-3 rounded-[50px] transform active:translate-y-1 ${config[type]} ${className}`}
+      className={`text-white px-4 border-blue-800 border-2 py-2 hover:ring-2 rounded-[50px] transform active:translate-y-1 ${config[type]} ${className}`}
     >
       <span>{children}</span>
     </button>
