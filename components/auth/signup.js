@@ -25,9 +25,7 @@ function page() {
       signInWithPopup(auth,provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const token = credential.accessToken;
         const user = result.user;
-        console.log(user,token);
       }).catch((e) => {
         window.alert(e.message)
       });
