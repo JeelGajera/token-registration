@@ -3,8 +3,11 @@ import { auth } from "../../config/firebase";
 import { createUserWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import DataField from "./DataField";
 import Button from "../Button";
+import { useRouter } from "next/navigation";
+
 
 function Page() {
+  const router = useRouter();
   //form handelers
   const [data, _data] = useState({ name: "", email: "", password: "" })
   const change = (e) => {
@@ -27,11 +30,9 @@ function Page() {
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
-        const user = result.user;
-<<<<<<< HEAD
-=======
-        console.log(user, token);
->>>>>>> d0883626921ce448c70124beab048f8ff08abc86
+        if(credential){
+          router.push("/home")
+        }
       }).catch((e) => {
         window.alert(e.message)
       });
@@ -41,15 +42,15 @@ function Page() {
   return (
     <>
       {/* Signup with google*/}
-      <div class="my-5 cursor-pointer" onClick={googleSignup}>
-        <div class="w-fit relative group">
+      <div className="my-5 cursor-pointer" onClick={googleSignup}>
+        <div className="w-fit relative group">
           <div
-            class="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
+            className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200">
           </div>
-          <div class="relative ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start">
-            <div class="p-2 rounded-lg flex items-center bg-black">
-              <img src="/google.svg" alt="Google" class="w-8" />
-              <span class="text-lg mx-2 text-gray-400 ">Signup with google</span>
+          <div className="relative ring-1 ring-gray-900/5 rounded-lg leading-none flex items-top justify-start">
+            <div className="p-2 rounded-lg flex items-center bg-black">
+              <img src="/google.svg" alt="Google" className="w-8" />
+              <span className="text-lg mx-2 text-gray-400 ">Signup with google</span>
             </div>
           </div>
         </div>

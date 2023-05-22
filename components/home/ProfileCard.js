@@ -1,8 +1,9 @@
 'use client';
 
 import React from 'react'
+import moment from 'moment/moment';
 
-function ProfileCard({ name, email, photo }) {
+function ProfileCard({ lastseen, email, photo }) {
     return (
         <>
             <div className="flex flex-row items-center justify-center " >
@@ -14,8 +15,8 @@ function ProfileCard({ name, email, photo }) {
                     />
                 </div>
                 <div className="flex-1 flex-col items-center bg-transparent">
-                    <div className="text-sm font-bold bg-transparent">{name}</div>
                     <div className="text-sm font-bold bg-transparent">{email}</div>
+                    <div className="text-[10px]  bg-transparent">{moment(lastseen).calendar()}</div>
                 </div>
             </div>
         </>
