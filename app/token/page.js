@@ -4,6 +4,7 @@ import React from "react";
 import Tokens from "@/data/token.json";
 import TokenCard from "@/components/token/TokenCard";
 import ProfileCard from "@/components/home/ProfileCard";
+import { auth } from "@/config/firebase";
 
 function page() {
     return (
@@ -24,6 +25,7 @@ function page() {
                         <TokenCard
                             key={index}
                             token={token}
+                            user = {auth?.currentUser?.email}
                         />
                     ))}
                 </div>

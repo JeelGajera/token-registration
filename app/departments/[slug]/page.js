@@ -3,9 +3,11 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import ProfileCard from "@/components/home/ProfileCard";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth, db } from "@/config/firebase";
-import { collection, query, where, getDocs } from 'firebase/firestore';
+import { collection, query, where, getDocs, addDoc } from 'firebase/firestore';
 import Button from "@/components/Button";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+
 
 
 
@@ -14,7 +16,10 @@ function Page(context) {
     const [user, _user] = useState(null);
     const [department, _department] = useState(context.params.slug);
     const [list, _list] = useState([]);
+    const path = usePathname();
+    const router = useRouter();
 
+    console.log(path);
     useLayoutEffect(() => {
         onAuthStateChanged(auth, function (user) {
             if (user) {
@@ -37,6 +42,20 @@ function Page(context) {
             documents.push({ id: doc.id, ...doc.data() });
         });
         _list(documents)
+    }
+
+    const handleGetToken = async (index) => {
+        const result = await addDoc(collection(db, 'tokens'), {
+            userId : user.uid,
+            type: path.split('/')[2],
+            createdAt : (new Date()).toISOString(),
+            description : list[index].description,
+            provider: list[index].name,
+            address : list[index].address,
+            email : user.email,
+        })
+        const tokenId = result.id;
+        router.push(`/token?id=${tokenId}`);
     }
 
 
@@ -98,7 +117,7 @@ function Page(context) {
                                             {item.description}
                                         </td>
                                         <td className="px-6 py-4">
-                                            <Button>Get Token</Button>
+                                            <Button onClick={() => handleGetToken(index)}>Get Token</Button>
                                         </td>
                                     </tr>
                                 )

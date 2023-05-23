@@ -19,9 +19,11 @@ function Page() {
   const signIn = async () => {
     var message;
     const response = await createUserWithEmailAndPassword(auth, data.email, data.password)
-      .catch((e) => { message = e.message });
+      .catch((e) => { message = e.message })
+      .then((result) => { router.push('/home') })
     message = response ?? message;
-    window.alert(message)
+    // window.alert(message);
+    // console.log(message);
   }
 
   //google signup
@@ -34,6 +36,7 @@ function Page() {
           router.push("/home")
         }
       }).catch((e) => {
+        console.log(e);
         window.alert(e.message)
       });
 

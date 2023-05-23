@@ -5,23 +5,27 @@ import { auth } from "../../config/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import DataField from "./DataField";
 import Button from "../Button";
+import { useRouter } from "next/navigation";
 
 
 function Page() {
+  const router = useRouter();
   //form handelers
   const [data, _data] = useState({ email: "", password: "" })
   const change = (e) => {
     _data({ ...data, [e.target.name]: e.target.value });
-    console.log(data);
+    // console.log(data);
   }
 
   //login
   const logIn = async () => {
     var message;
     const response = await signInWithEmailAndPassword(auth, data.email, data.password)
+    .then((result) => { router.push('/home') })
       .catch((e) => { message = e.message });
     message = response ?? message;
-    window.alert(message)
+    // window.alert(message);
+    // console.log(message);
   }
 
   return (
