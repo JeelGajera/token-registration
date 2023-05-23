@@ -6,11 +6,12 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import Link from "next/link";
 
-import { auth,db } from "@/config/firebase";
+import { auth, db } from "@/config/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import {collection, addDoc} from 'firebase/firestore'
+import { collection, addDoc } from 'firebase/firestore'
+import DataField from "@/components/auth/DataField";
 
-function page() {
+function Page() {
   const router = useRouter();
   const [user, _user] = useState(null);
   useLayoutEffect(() => {
@@ -26,19 +27,19 @@ function page() {
   }, [])
 
 
-  const [form,_form] = useState({name:"",category:"",address:"",description:""})
-  const change = (e)=>{
-    _form({...form,[e.target.name]:e.target.value});
+  const [form, _form] = useState({ name: "", category: "", address: "", description: "" })
+  const change = (e) => {
+    _form({ ...form, [e.target.name]: e.target.value });
   }
-  const submit = async ()=>{
-    const response = await addDoc(collection(db,'request'),{
-      userId:user.uid,
-      name:form.name,
+  const submit = async () => {
+    const response = await addDoc(collection(db, 'request'), {
+      userId: user.uid,
+      name: form.name,
       category: form.category,
-      address:form.address,
-      description:form.description
+      address: form.address,
+      description: form.description
     });
-    if(response)
+    if (response)
       window.alert("request sent successfully");
   }
 
@@ -62,19 +63,45 @@ function page() {
         <h1 className="text-2xl text-center font-bold text-white">Register Your Department</h1>
         <div className="m-5 flex justify-center items-center">
 
-            {/* formatting required here ------------------------------------------*/}
-          <form onSubmit={(e) => e.preventDefault()} className="text-blue-300">
-            Name: <input name="name" type="text" onChange={change} value={form.name} required /><br />
-            Category: <select name="category" defaultValue="government" onChange={change} value={form.category}>
-              <option value="government">Government</option>
-              <option value="bank">Bank</option>
-              <option value="municipality">Municipality</option>
-              <option value="hospital">Hospital</option>
-            </select><br />
-            Address: <textarea type="textarea" onChange={change} value={form.address} name="address" required /><br />
-            Description: <input type="text" onChange={change} value={form.description} name="description" required /><br />
-            <button type="submit" onClick={submit}>Submit</button>
-             {/* formatting required here ------------------------------------------*/}
+          <form onSubmit={(e) => e.preventDefault()} className="text-red-400">
+            <div className="flex flex-col gap-4">
+              <DataField
+                name="name"
+                type="text"
+                label={"Name"}
+                onChange={change}
+                value={form.name}
+              />
+              <div className="flex gap-2">
+                <label htmlFor="category">Category</label>
+                <select name="category" defaultValue="government" onChange={change} value={form.category} className="p-2 rounded-full text-black">
+                  <option value="government">Government</option>
+                  <option value="bank">Bank</option>
+                  <option value="municipality">Municipality</option>
+                  <option value="hospital">Hospital</option>
+                </select>
+              </div>
+              <DataField
+                name="address"
+                type="textarea"
+                label={"Address"}
+                onChange={change}
+                value={form.address}
+              />
+              <DataField
+                name="description"
+                type="text"
+                label={"Description"}
+                onChange={change}
+                value={form.description}
+              />
+              <Button
+                className={"w-fit"}
+                onClick={submit}
+                btype={"submit"}
+                type={"blue"}
+              > Submit</Button>
+            </div>
 
           </form>
         </div>
@@ -83,4 +110,4 @@ function page() {
   );
 }
 
-export default page;
+export default Page;

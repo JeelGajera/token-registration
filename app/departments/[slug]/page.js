@@ -10,7 +10,7 @@ import Link from "next/link";
 
 
 
-function page(context) {
+function Page(context) {
     const [user, _user] = useState(null);
     const [department, _department] = useState(context.params.slug);
     const [list, _list] = useState([]);
@@ -87,7 +87,7 @@ function page(context) {
 
                             <tbody>
                                 {list.map((item, index) => (
-                                    <tr className="bg-white bg-opacity-10 border-stone-700">
+                                    <tr className="bg-white bg-opacity-10 border-stone-700" key={index}>
                                         <th scope="row" className="px-6 py-4 font-medium whitespace-nowrap text-white">
                                             {item.name}
                                         </th>
@@ -114,4 +114,4 @@ function page(context) {
     )
 }
 
-export default page
+export default Page;

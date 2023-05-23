@@ -13,7 +13,7 @@ import Link from "next/link";
 
 
 
-function page() {
+function Page() {
 
     const router = useRouter();
     const [user, _user] = useState(null);
@@ -66,4 +66,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;
