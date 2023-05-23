@@ -36,7 +36,7 @@ function Page() {
             <div>
                 <div className="px-1 sm:px-5 flex justify-between items-center w-full h-20 bg-white bg-opacity-10 backdrop-blur-md rounded-lg shadow-2xl">
                     <div>
-                        {user && <Link href="/register"> <Button>Apply for Department</Button></Link>}
+                        {user?.uid==="GAu2DFvgP8fG06xuD4ZWV2Huwcw1" && <Link href="/register"> <Button>Apply for Department</Button></Link>}
                     </div>
                     {user && <ProfileCard
                         email={user?.email}
