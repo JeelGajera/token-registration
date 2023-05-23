@@ -6,7 +6,7 @@ import TokenCard from "@/components/token/TokenCard";
 import ProfileCard from "@/components/home/ProfileCard";
 import { auth } from "@/config/firebase";
 
-function page() {
+function Page() {
     return (
         <>
             <div className="px-1 sm:px-5 flex justify-between items-center w-full h-20 bg-white bg-opacity-10 backdrop-blur-md rounded-lg shadow-2xl">
@@ -14,8 +14,8 @@ function page() {
                     <h1 className="text-2xl font-bold text-white">Token Details</h1>
                 </div>
                 <ProfileCard
-                    name="John Doe"
-                    email="john.doe@gmail.com"
+                    name={auth?.currentUser?.displayName ? auth?.currentUser?.displayName : ""}
+                    email={auth?.currentUser?.email ? auth?.currentUser?.email : ""}
                     photo={"/profile.png"}
                 />
             </div>
@@ -34,4 +34,4 @@ function page() {
     );
 }
 
-export default page;
+export default Page;
