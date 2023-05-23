@@ -16,7 +16,7 @@ function Page() {
   const [user, _user] = useState(null);
   useLayoutEffect(() => {
     onAuthStateChanged(auth, function (user) {
-      if (user) {
+      if (user && user?.uid==="GAu2DFvgP8fG06xuD4ZWV2Huwcw1") {
         // console.log("user is loggedin: ");
         _user(user);
       } else {
@@ -32,7 +32,7 @@ function Page() {
     _form({ ...form, [e.target.name]: e.target.value });
   }
   const submit = async () => {
-    const response = await addDoc(collection(db, 'request'), {
+    const response = await addDoc(collection(db, 'department'), {
       userId: user.uid,
       name: form.name,
       category: form.category,
